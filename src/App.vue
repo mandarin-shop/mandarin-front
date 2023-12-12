@@ -1,6 +1,7 @@
 <script setup>
 import Footer from "@/components/partials/Footer.vue";
 import Header from "@/components/partials/Header.vue";
+//test
 </script>
 
 <template>
