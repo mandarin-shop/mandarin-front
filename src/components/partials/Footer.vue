@@ -29,21 +29,20 @@
         <header class="header">Ilovani yuklab olish</header>
         <div class="mt-4 justify-center flex  items-center ">
           <i class='bx bxl-apple '></i> <span class="text-sm pr-5">AppStore</span>
-          <i class='bx bxl-play-store '></i> <span class="text-sm">Google Play</span>
+          <i class='bx bxl-play-store  text-blue-500'></i> <span class="text-sm">Google Play</span>
         </div>
       </div>
     </div>
 
-    <div class="text-right px-32   pt-5  ">
-      <header class="header">Uzum ijtimoiy tarmoqlarda</header>
+    <div class="text-right px-36  pt-5">
+      <header class="header">Mandarin ijtimoiy tarmoqlarda</header>
       <div class="pt-2">
-        <i class='bx bxl-instagram'></i>
-        <i class='bx bxl-telegram'></i>
-        <i class='bx bxl-youtube'></i>
-        <i class='bx bxl-facebook-square'></i>
+        <i class='bx bx1 bxl-instagram-alt text-pink-500 mx-1 '></i>
+        <i class='bx bx1 bxl-telegram mx-1'></i>
+        <i class='bx bx1 bxl-youtube text-red-700 mx-2'></i>
+        <i class='bx bx1 bxl-facebook-square text-blue-900 mx-2'></i>
       </div>
       
-    <div class="hr-footer"></div>
   
     </div>
   </footer>
@@ -51,8 +50,17 @@
 
 <style scoped>
 
-.hr-footer {
-  margin-top: 65px;
-  border:1px solid gray
+.bx {
+  font-size: 30px;
 }
+.bx1 {
+  font-size: 37px;
+}
+
+.bxl-telegram {
+  color: rgb(94, 167, 251);
+}
+
 </style>
+
+
