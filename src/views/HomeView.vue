@@ -1,7 +1,4 @@
 <script setup></script>
-
-<template>
-  <div class="home"></div>
-</template>
+<template></template>
 
 <style></style>
