@@ -1,30 +1,29 @@
 <script setup></script>
 <template>
   <footer class="footer">
-    <div class="flex  ml-12 gap-8   flex-wrap border-2">
-      <div class="w-72  border-2 ">
+    <div class="flex  ml-12 gap-8   flex-wrap">
+      <div class="w-72">
           <header class="header">Biz haqimizda</header>
           <div class="mt-3">
             <router-link to="#" class="block header-text">Topshirish punktlari</router-link>
             <router-link to="#" class=" header-text">Vakansiyalar</router-link>
           </div>
       </div>
-      <div class="w-72 border-2">
-            
+      <div class="w-72">
         <header class="header">Foydalanuvchilarga</header>
         <div class="mt-3">
           <router-link to="#" class="block  header-text">Biz bilan bog'lanish</router-link>
           <router-link to="#"  class=" header-text">Savol-Javob</router-link>
         </div>
       </div>
-      <div class="w-64 border-2 ">
+      <div class="w-64">
             
         <header class="header">Tadbirkorlarga</header>
         <div class="mt-3">
           <router-link to="#" class="block header-text">Uzumda soting</router-link>
           <router-link to="#"  class=" header-text">Sotuvchi kabinetiga kirish</router-link></div>
       </div>
-      <div class="w-72 border-2">
+      <div class="w-72">
             
         <header class="header">Ilovani yuklab olish</header>
         <div class="mt-4  flex  items-center ">
@@ -33,7 +32,7 @@
         </div>
       </div>
 
-      <div class="w-72 border-2  ">
+      <div class="w-72">
         <header class="header">Mandarin ijtimoiy tarmoqlarda</header>
           <div class="mt-4  flex  items-center">
             <i class='bx bx1 bxl-instagram-alt text-pink-500 mx-1 '></i>
@@ -43,7 +42,6 @@
           </div>
       </div>
     </div>
-
   </footer>
 </template>
 
