@@ -1,6 +1,6 @@
 <script setup></script>
 <template>
-  <footer class="footer">
+  <footer class="footer mb-32  ">
     <div class="flex  ml-12 gap-8   flex-wrap">
       <div class="w-72">
           <header class="header">Biz haqimizda</header>
