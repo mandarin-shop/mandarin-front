@@ -1,3 +1,18 @@
+<script setup>
+import SvgIcon from "@jamescoyle/vue-icon";
+import { mdiStar } from "@mdi/js";
+import { mdiCartPlus } from "@mdi/js";
+import { mdiHeartOutline } from "@mdi/js";
+import { ref } from "vue";
+
+const product = ref();
+fetch("https://fakestoreapi.com/products")
+  .then((res) => res.json())
+  .then((json) => {
+    (product.value = json), console.log(json);
+  });
+</script>
+
 <template>
   <!-- <h1>Katta sotuvlar ></h1> -->
   <section class="container flex flex-wrap justify-around gap-1 mb-10">
@@ -13,10 +28,14 @@
           alt="img"
           srcset=""
         />
-        <svg-icon class="absolute top-1 right-1" type="mdi" :path="mdiHeartOutline"></svg-icon>
+        <svg-icon
+          class="absolute top-1 right-1"
+          type="mdi"
+          :path="mdiHeartOutline"
+        ></svg-icon>
       </div>
-      <div class="cardInfos  flex-row  g-4 h-[180px]">
-        <div class="cardTopInfo ">
+      <div class="cardInfos flex-row g-4 h-[180px]">
+        <div class="cardTopInfo">
           <p class="productTitle leading-tight text-md">{{ item?.title }}</p>
           <div class="status gap-2 mt-2">
             <div class="rate flex gap-1 align-item-center">
@@ -26,7 +45,9 @@
                 type="mdi"
                 :path="mdiStar"
               ></svg-icon>
-              <p class="text-sm">{{ item.rating.rate }} ({{ item.rating.count }} baho)</p>
+              <p class="text-sm">
+                {{ item.rating.rate }} ({{ item.rating.count }} baho)
+              </p>
             </div>
             <p
               class="monthlyPay inline-block bg-yellow-300 px-4 py-1 rounded-md text-[13px] font-normal my-auto"
@@ -36,7 +57,7 @@
           </div>
         </div>
         <div class="cardFooterInfo flex justify-between mt-3 px-2">
-          <div class="price  w-[200]">
+          <div class="price w-[200]">
             <p class="line-through">{{ item.price * 1000 * 2 }}</p>
             <p>{{ item.price * 1000 }}</p>
           </div>
@@ -51,20 +72,5 @@
     </div>
   </section>
 </template>
-
-<script setup>
-import SvgIcon from "@jamescoyle/vue-icon";
-import { mdiStar } from "@mdi/js";
-import { mdiCartPlus } from "@mdi/js";
-import { mdiHeartOutline } from "@mdi/js";
-import { ref } from "vue";
-
-const product = ref();
-fetch("https://fakestoreapi.com/products")
-  .then((res) => res.json())
-  .then((json) => {
-    (product.value = json), console.log(json);
-  });
-</script>
 
 <style lang="scss" scoped></style>
