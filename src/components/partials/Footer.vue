@@ -10,7 +10,7 @@
           </div>
       </div>
       <div class="w-72 border-2">
-            
+
         <header class="header">Foydalanuvchilarga</header>
         <div class="mt-3">
           <router-link to="#" class="block  header-text">Biz bilan bog'lanish</router-link>
@@ -18,14 +18,14 @@
         </div>
       </div>
       <div class="w-64 border-2 ">
-            
+
         <header class="header">Tadbirkorlarga</header>
         <div class="mt-3">
           <router-link to="#" class="block header-text">Uzumda soting</router-link>
           <router-link to="#"  class=" header-text">Sotuvchi kabinetiga kirish</router-link></div>
       </div>
       <div class="w-72 border-2">
-            
+
         <header class="header">Ilovani yuklab olish</header>
         <div class="mt-4  flex  items-center ">
           <i class='bx bxl-apple '></i> <span class="text-sm pr-5">AppStore</span>
