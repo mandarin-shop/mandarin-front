@@ -1,11 +1,12 @@
 <script setup>
-  import Slider from '../components/slider/Slider.vue'
+import gritCard from "../components/card/gritCard.vue";
 </script>
 <template>
-  <div class="home">
+  <main class="home">
     <h1>This is an home page</h1>
-    <Slider />
-  </div>
+
+    <gritCard></gritCard>
+  </main>
 </template>
 
 <style scoped>
