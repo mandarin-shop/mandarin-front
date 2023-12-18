@@ -1,10 +1,8 @@
-<script setup>
-import gritCard from "../components/card/gritCard.vue";
-</script>
+<script setup></script>
 <template>
-  <main class="home">
+  <div class="home">
     <h1>This is an home page</h1>
-  </main>
+  </div>
 </template>
 
 <style></style>

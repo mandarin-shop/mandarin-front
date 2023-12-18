@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "boxicons": "^2.1.4",
     "@jamescoyle/vue-icon": "jamescoyle/vue-icon",
     "@mdi/js": "^7.3.67",
     "pinia": "^2.1.7",

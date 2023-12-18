@@ -1,7 +1,9 @@
-<script setup></script>
+<script setup>
+import ProductSidebar from "../components/partials/product-sidebar.vue";
+</script>
 <template>
   <div class="category">
-    <h1>This is an category page</h1>
+    <ProductSidebar />
   </div>
 </template>
 
