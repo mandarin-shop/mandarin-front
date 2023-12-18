@@ -3,17 +3,8 @@ export default {
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      ratioSlider: {
-        '3/1': '3 / 1',
-      },
       container: {
-        custom: '100%',
         center: true,
-        screens: {
-          md: "640px",
-          lg: "960px",
-          xl: "1240px",
-        },
         padding: {
           DEFAULT: "1rem",
           sm: "2rem",

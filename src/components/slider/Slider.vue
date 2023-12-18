@@ -28,27 +28,26 @@ import 'swiper/css/pagination';
 const modules = [Navigation, Pagination, Autoplay];
 
 const imagesArr = ref([
-  {
-    id: 1,
-    img: 'https://picsum.photos/200/300'
-  },
-  {
-    id: 2,
-    img: 'https://picsum.photos/100/200'
-  },
-  {
-    id: 3,
-    img: 'https://picsum.photos/100/400'
-  },
-  {
-    id: 4,
-    img: 'https://picsum.photos/100/150'
-  },
-  {
-    id: 5,
-    img: 'https://picsum.photos/100/120'
-  },
-
+  // {
+  //   id: 1,
+  //   img: 'https://picsum.photos/200/300'
+  // },
+  // {
+  //   id: 2,
+  //   img: 'https://picsum.photos/100/200'
+  // },
+  // {
+  //   id: 3,
+  //   img: 'https://picsum.photos/100/400'
+  // },
+  // {
+  //   id: 4,
+  //   img: 'https://picsum.photos/100/150'
+  // },
+  // {
+  //   id: 5,
+  //   img: 'https://picsum.photos/100/120'
+  // },
 ]);
 
 </script>
