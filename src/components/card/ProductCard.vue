@@ -1,11 +1,15 @@
 <script setup></script>
 
 <template>
-  <div class="w-full px-[50px] py-[20px]">
+  <div class="w-full">
     <div
-      class="w-[20%] justify-around hover:shadow-lg shadow-gray-500 duration-500 ease-in-out cursor-pointer rounded-lg"
+      class="justify-around hover:shadow-lg shadow-gray-500 duration-500 ease-in-out cursor-pointer rounded-lg"
     >
-      <img class="rounded-lg" src="../../images/product.jpg" alt="" />
+      <img
+        class="rounded-lg"
+        src="../../assets/images/ui/product1.jpg"
+        alt=""
+      />
       <div class="mt-[10px] p-[10px]">
         <h1>Новогодняя пижама Playowo для мальчиков и девочек</h1>
         <div class="flex mb-[10px]">
