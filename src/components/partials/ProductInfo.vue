@@ -1,12 +1,12 @@
 <script setup>
-  import {ref} from "vue"
-      const num = ref(1);
-      function Decrement(){
-        num.value--
-      }
-      function Increment(){
-        num.value++
-      }
+    import {ref} from "vue"
+    const num = ref(1);
+    function Decrement(){
+      num.value--
+    }
+    function Increment(){
+      num.value++
+    }
   
 </script>
 <template>
