@@ -20,7 +20,7 @@ const imagesArr = ref([Banner1, Banner2, Banner3, Banner4, Banner5, Banner6]);
 </script>
 
 <template>
-  <section class="p-0 max-w-[1304px] px-[32px] mx-auto overflow-hidden">
+  <section class="w-full mx-auto overflow-hidden">
     <swiper
       :modules="modules"
       :slides-per-view="1"
