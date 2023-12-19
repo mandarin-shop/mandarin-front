@@ -1,0 +1,90 @@
+<script setup></script>
+
+<template>
+  <aside class="h-auto bg-purple pr-4 pb-6 flex flex-col">
+    <h2 class="text-lg mb-3 font-semibold">Категории</h2>
+    <div class="text-gray-700 pl-4">
+      <ol class="list-none cursor-pointer">
+        <li
+          class="mt-[5px] hover:bg-slate-200 rounded-md active:bg-slate-100 px-2 py-[5px]"
+        >
+          <span>Все категории</span>
+        </li>
+        <li
+          class="mt-[5px] hover:bg-slate-200 rounded-md active:bg-slate-100 px-2 py-[5px]"
+        >
+          <span>Электроника</span>
+        </li>
+        <li
+          class="mt-[5px] hover:bg-slate-200 rounded-md active:bg-slate-100 px-2 py-[5px]"
+        >
+          <span>Аксессуары для электроники</span>
+        </li>
+        <li
+          class="mt-[5px] hover:bg-slate-200 rounded-md active:bg-slate-100 px-2 py-[5px]"
+        >
+          <span>Компьютерная техника</span>
+        </li>
+        <li
+          class="mt-[5px] hover:bg-slate-200 rounded-md active:bg-slate-100 px-2 py-[5px]"
+        >
+          <span>Наушники и аудиотехника</span>
+        </li>
+        <li
+          class="mt-[5px] hover:bg-slate-200 rounded-md active:bg-slate-100 px-2 py-[5px]"
+        >
+          <span>Смартфоны и телефоны</span>
+        </li>
+      </ol>
+    </div>
+    <h2 class="text-lg mt-10 mb-2 font-semibold">Цена</h2>
+    <div class="pl-6">
+      <p class="text-sm">Очистить</p>
+      <div class="mt-4">
+        <div class="flex gap-2">
+          <input
+            type="text"
+            class="border-2 border-gray-300 p-[5px] focus:border-black focus:outline-none w-[120px] rounded-md"
+          />
+          <input
+            type="text"
+            class="border-2 border-gray-300 focus:border-black focus:outline-none w-[120px] rounded-md"
+          />
+        </div>
+        <div class="mt-[10px]">
+          <input type="range" name="" id="" class="w-[70%]" />
+        </div>
+      </div>
+    </div>
+    <h2 class="text-lg mt-[30px] font-semibold">Бренд</h2>
+    <div class="mt-4">
+      <div class="flex gap-x-3 mb-2 items-center">
+        <input class="w-4 h-4" type="checkbox" name="" id="FPB" />
+        <label for="FPB">FPB</label>
+      </div>
+
+      <div class="flex gap-x-3 mb-2 items-center">
+        <input class="w-4 h-4" type="checkbox" name="" id="Nothing" />
+        <label for="Nothing">Nothing</label>
+      </div>
+
+      <div class="flex gap-x-3 mb-2 items-center">
+        <input class="w-4 h-4" type="checkbox" name="" id="SSMART" />
+        <label for="SSMART">SSMART</label>
+      </div>
+
+      <div class="flex gap-x-3 mb-2 items-center">
+        <input class="w-4 h-4" type="checkbox" name="" id="Acer" />
+        <label for="Acer">Acer</label>
+      </div>
+      <p class="text-xs text-gray-500 cursor-pointer">Еще 61</p>
+    </div>
+  </aside>
+</template>
+
+<style scoped>
+.router-link-active {
+  background-color: #fff;
+  color: black;
+}
+</style>

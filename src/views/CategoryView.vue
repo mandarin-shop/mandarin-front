@@ -1,8 +1,17 @@
-<script setup></script>
+<script setup>
+import ProductSidebar from "../components/partials/product-sidebar.vue";
+</script>
 <template>
   <div class="category">
-    <h1>This is an category page</h1>
+    <div class="container flex pt-4">
+      <ProductSidebar class="w-[300px]" />
+      <div class="content bg-gray-200"></div>
+    </div>
   </div>
 </template>
 
-<style></style>
+<style scoped>
+.content {
+  width: calc(100% - 300px);
+}
+</style>
