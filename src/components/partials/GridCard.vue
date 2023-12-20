@@ -3,6 +3,10 @@ import { ref } from "vue";
 import Title from "@/components/ui_element/Title.vue";
 import ProductCard from "../card/ProductCard.vue";
 
+const props = defineProps({
+  title: String,
+});
+
 const product = ref();
 fetch("https://fakestoreapi.com/products")
   .then((res) => res.json())
@@ -12,10 +16,9 @@ fetch("https://fakestoreapi.com/products")
 </script>
 
 <template>
-  <!-- <h1>Katta sotuvlar ></h1> -->
   <section class="mb-10">
-    <div class="container mb-4">
-      <Title link="/products" text="Katta sotuvlar" />
+    <div class="container mb-4" v-if="props.title">
+      <Title link="/products" :text="props.title" />
     </div>
     <div class="container flex flex-wrap justify-around gap-1">
       <div

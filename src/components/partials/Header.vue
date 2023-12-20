@@ -89,16 +89,16 @@ const catefories = [
       </div>
 
       <div class="flex items-center">
-        <div to="/" class="flex items-center">
-          <i class="bx bx-user mr-2"></i>
+        <div to="/" class="flex items-center text-xl">
+          <i class="bx bx-user mr-1"></i>
           <span class="text-sm">Kirish</span>
         </div>
-        <router-link to="/" class="flex items-center mx-4">
-          <i class="bx bx-heart mr-2"></i>
+        <router-link to="/favorite" class="flex items-center mx-5 text-xl">
+          <i class="bx bx-heart mr-1"></i>
           <span class="text-sm">Saralanganlar</span>
         </router-link>
-        <router-link to="/" class="flex items-center">
-          <i class="bx bx-basket mr-2"></i>
+        <router-link to="/cart" class="flex items-center text-xl">
+          <i class="bx bx-basket mr-1"></i>
           <span class="text-sm">Savat</span>
         </router-link>
       </div>
@@ -106,61 +106,62 @@ const catefories = [
     <!-- nav -->
     <nav class="pb-3 container flex items-center justify-between">
       <router-link
-        to="#"
+        to="/category"
         class="nav_category relative text-gray-500 hover:text-black duration-200"
         >Elektronika</router-link
       >
       <router-link
-        to="#"
+        to="/category"
         class="nav_category relative text-gray-500 hover:text-black duration-200"
         >Maishiy texnika</router-link
       >
       <router-link
-        to="#"
+        to="/category"
         class="nav_category relative text-gray-500 hover:text-black duration-200"
         >Kiyim</router-link
       >
       <router-link
-        to="#"
+        to="/category"
         class="nav_category relative text-gray-500 hover:text-black duration-200"
         >Poyafzallar</router-link
       >
       <router-link
-        to="#"
+        to="/category"
         class="nav_category relative text-gray-500 hover:text-black duration-200"
         >Aksesuarlar</router-link
       >
       <router-link
-        to="#"
+        to="/category"
         class="nav_category relative text-gray-500 hover:text-black duration-200"
         >Uy-ro'zg'or buyumlari</router-link
       >
       <router-link
-        to="#"
+        to="/category"
         class="nav_category relative text-gray-500 hover:text-black duration-200"
         >Go'zallik va parvarish</router-link
       >
       <router-link
-        to="#"
+        to="/category"
         class="nav_category relative text-gray-500 hover:text-black duration-200"
         >Salomatlik</router-link
       >
       <router-link
-        to="#"
+        to="/category"
         class="nav_category relative text-gray-500 hover:text-black duration-200"
         >Qurilish va tamirlash</router-link
       >
       <router-link
-        to="#"
+        to="/category"
         class="nav_category relative text-gray-500 hover:text-black duration-200"
         >Yana</router-link
       >
     </nav>
   </header>
 
+  <!-- category sub menu -->
   <section
     v-if="isShowCatalog"
-    class="catalogs w-full bg-white absolute left-0"
+    class="catalogs w-full bg-white absolute left-0 z-30"
   >
     <div class="container h-full">
       <div class="flex relative h-full">
@@ -182,7 +183,6 @@ const catefories = [
           </li>
         </ul>
       </div>
-      <!-- <div class="w-3/4 h-full overflow-y-auto"></div> -->
     </div>
   </section>
 </template>

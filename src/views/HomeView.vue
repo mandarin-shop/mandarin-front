@@ -1,7 +1,7 @@
 <script setup>
 import Slider from "@/components/slider/Slider.vue";
-import GridCard from "../components/partials/GridCard.vue";
-import Banner from "../components/ui_element/Banner.vue";
+import GridCard from "@/components/partials/GridCard.vue";
+import Banner from "@/components/ui_element/Banner.vue";
 import Banner5 from "@/assets/images/banner/banner_5.jpg";
 </script>
 <template>
@@ -9,9 +9,9 @@ import Banner5 from "@/assets/images/banner/banner_5.jpg";
     <div class="container pt-2 pb-16">
       <Slider />
     </div>
-    <GridCard />
+    <GridCard title="Katta sotuvlar" />
     <Banner link="/category" :img="Banner5" class="mb-10" />
-    <GridCard />
+    <GridCard title="Muddatli to'lov" />
     <Banner link="/category" :img="Banner5" class="mb-10" />
   </div>
 </template>
