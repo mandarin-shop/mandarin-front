@@ -1,5 +1,8 @@
 <script setup>
 import { ref } from "vue";
+import { useLogin } from "@/composables/Login";
+
+const { showLoginModal, onSubmitLogin } = useLogin();
 
 const isShowCatalog = ref(false);
 
@@ -74,6 +77,7 @@ const catefories = [
           <i class="bx bx-category-alt mr-2"></i>
           <span class="font-semibold">Katalog</span>
         </button>
+
         <div class="flex">
           <input
             type="text"
@@ -91,8 +95,15 @@ const catefories = [
       <div class="flex items-center">
         <div to="/" class="flex items-center">
           <i class="bx bx-user mr-2"></i>
-          <span class="text-sm">Kirish</span>
+
+          <button
+            class="text-sm cursor-pointer"
+            @click="showLoginModal = !showLoginModal"
+          >
+            Kirish
+          </button>
         </div>
+
         <router-link to="/" class="flex items-center mx-4">
           <i class="bx bx-heart mr-2"></i>
           <span class="text-sm">Saralanganlar</span>
@@ -156,6 +167,48 @@ const catefories = [
         >Yana</router-link
       >
     </nav>
+
+    <section
+      v-if="showLoginModal"
+      class="modal w-full h-screen fixed z-50 flex items-center justify-center top-0 left-0"
+    >
+      <div class="w-[30%] bg-white rounded-xl h-auto p-7">
+        <div class="text-right">
+          <button
+            class="py-1 px-2.5 bg-gray-300 rounded-full text-gray-500 font-bold"
+            @click="showLoginModal = false"
+          >
+            X
+          </button>
+        </div>
+        <form @submit.prevent="onSubmitLogin" class="text-left">
+          <div>
+            <h2 class="text-2xl font-semibold mb-3">Введите номер телефона</h2>
+            <p class="text-[18px] text-gray-700 mb-7">
+              Отправим смс с кодом подтверждения
+            </p>
+            <input
+              class="bg-gray-200 p-3 w-full block rounded-lg mb-7"
+              placeholder="+998 00 000-00-00"
+              type="tel"
+              name=""
+              id=""
+            />
+            <button
+              class="w-full bg-blue-600 p-3 rounded-lg text-white text-xl mb-32"
+            >
+              Получить код
+            </button>
+          </div>
+          <div class="text-center">
+            <p>Авторизуясь, вы соглашаетесь</p>
+            <a class="text-blue-400" href="/"
+              >c политикой обработки персональных данных</a
+            >
+          </div>
+        </form>
+      </div>
+    </section>
   </header>
 
   <section
@@ -215,5 +268,8 @@ const catefories = [
 }
 .categories_menu::-webkit-scrollbar {
   display: none;
+}
+.modal {
+  background-color: rgba(0, 0, 0, 0.8);
 }
 </style>
