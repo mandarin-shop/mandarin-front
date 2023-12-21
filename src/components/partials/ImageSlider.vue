@@ -1,30 +1,3 @@
-<template>
-  <div style="display: flex; gap: 20px">
-    <transition-group
-      style="
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        max-height: 60vh;
-        overflow-y: scroll;
-        position: sticky;
-      "
-      name="fade"
-      tag="div"
-    >
-      <div v-for="(image, index) in images" :key="index">
-        <img @click="onlick" class="img1" :src="image" />
-      </div>
-    </transition-group>
-    <transition-group name="fade" tag="div">
-      <div style="display: flex" v-for="i in [currentIndex]" :key="i">
-        <a class="prev" @click="prev" href="#">&#10094; </a>
-        <img class="img" :src="currentImg" />
-        <a class="next" @click="next" href="#">&#10095; </a>
-      </div>
-    </transition-group>
-  </div>
-</template>
 <script>
 export default {
   name: "Slider",
@@ -65,6 +38,34 @@ export default {
   },
 };
 </script>
+
+<template>
+  <div style="display: flex; gap: 20px">
+    <transition-group
+      style="
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        max-height: 60vh;
+        overflow-y: scroll;
+        position: sticky;
+      "
+      name="fade"
+      tag="div"
+    >
+      <div v-for="(image, index) in images" :key="index">
+        <img @click="onlick" class="img1" :src="image" />
+      </div>
+    </transition-group>
+    <transition-group name="fade" tag="div">
+      <div style="display: flex" v-for="i in [currentIndex]" :key="i">
+        <a class="prev" @click="prev" href="#">&#10094; </a>
+        <img class="img" :src="currentImg" />
+        <a class="next" @click="next" href="#">&#10095; </a>
+      </div>
+    </transition-group>
+  </div>
+</template>
 
 <style lang="scss" scoped>
 .fade-enter-active,
