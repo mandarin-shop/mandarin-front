@@ -1,18 +1,17 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import Title from "@/components/ui_element/Title.vue";
 import ProductCard from "../card/ProductCard.vue";
+import { useProductStore } from "../../stores/product";
 
+const productStore = useProductStore();
 const props = defineProps({
   title: String,
 });
 
-const product = ref();
-fetch("https://fakestoreapi.com/products")
-  .then((res) => res.json())
-  .then((json) => {
-    (product.value = json), console.log(json);
-  });
+onMounted(() => {
+  productStore.getProducts();
+});
 </script>
 
 <template>
@@ -23,10 +22,10 @@ fetch("https://fakestoreapi.com/products")
     <div class="container flex flex-wrap justify-around gap-1">
       <div
         class="card w-[19%] mt-2"
-        v-for="(item, index) in product?.slice(0, 10)"
+        v-for="(item, index) in productStore.products.data"
         :key="index"
       >
-        <ProductCard />
+        <ProductCard :data="item" />
       </div>
     </div>
   </section>

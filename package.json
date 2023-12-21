@@ -11,6 +11,7 @@
   "dependencies": {
     "@jamescoyle/vue-icon": "jamescoyle/vue-icon",
     "@mdi/js": "^7.3.67",
+    "axios": "^1.6.2",
     "boxicons": "^2.1.4",
     "pinia": "^2.1.7",
     "swiper": "^11.0.5",
