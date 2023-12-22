@@ -1,5 +1,10 @@
 <script setup>
 import { ref } from "vue";
+
+const props = defineProps({
+  data: Object,
+});
+
 const count = ref(1);
 function increment() {
   count.value += 1;
@@ -15,16 +20,13 @@ function decrement() {
   <div class="py-4 border-t border-gray-300 flex items-center">
     <input type="checkbox" class="w-5 h-5 mr-10" />
     <div class="content flex items-start">
-      <img
-        src="../../assets/images/ui/product1.jpg"
-        alt="cart-img"
-        class="w-[100px]"
-      />
+      <img :src="props.data?.thumbnail" alt="cart-img" class="w-[100px]" />
       <div class="info pl-10">
         <p class="w-full flex items-center justify-between mb-4">
-          <router-link to="/product/1" class="mr-2 text-gray-800"
-            >Radar detektori Neoline X-COP Neoline X-COP 9700S, zaryadlovchi
-            sovg'a</router-link
+          <router-link
+            :to="'/product/' + props.data?.id"
+            class="mr-2 text-gray-800"
+            >{{ props.data?.title }}</router-link
           >
           <span class="flex items-center">
             <i class="bx bxs-trash text-2xl text-gray-500 mr-2"></i>
@@ -34,9 +36,9 @@ function decrement() {
         <div class="flex justify-between items-start">
           <p class="text-sm">
             <span class="text-gray-400 mr-2">Sotuvchi:</span>
-            <router-link to="#" class="text-gray-800"
-              >Radius Mobile</router-link
-            >
+            <router-link to="#" class="text-gray-800">{{
+              props.data?.brand
+            }}</router-link>
           </p>
           <div class="flex items-start">
             <!-- counter -->
@@ -58,8 +60,12 @@ function decrement() {
 
             <!-- sum -->
             <div class="text-end">
-              <p class="text-lg text-gray-900 font-semibold">2 990 000 so'm</p>
-              <del class="text-gray-400 text-sm">4 990 000 so'm</del>
+              <p class="text-lg text-gray-900 font-semibold">
+                {{ props.data?.price }} $
+              </p>
+              <del class="text-gray-400 text-sm"
+                >{{ +props.data?.price + 500 }} $</del
+              >
             </div>
           </div>
         </div>

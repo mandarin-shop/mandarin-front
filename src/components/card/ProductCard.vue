@@ -1,22 +1,42 @@
 <script setup>
-import { ref } from "vue";
-import { useLikeStore } from "../../stores/like";
+import { ref, onMounted } from "vue";
+import { useLikeStore } from "@/stores/like";
+import { useCartStore } from "@/stores/cart";
+import {
+  writeToLocaleStorage,
+  checkFromLocaleStorage,
+} from "@/hooks/localeStorage";
 
 const likeStore = useLikeStore();
+const cartStore = useCartStore();
 const props = defineProps({
   data: Object,
 });
-const isLike = ref(false);
+
+// added like
+const addedLike = ref(false);
+function addDataToLike() {
+  addedLike.value = writeToLocaleStorage("like", likeStore, props.data);
+}
+
+// added cart
+// const addedLike = ref(false);
+function addDataToCart() {
+  writeToLocaleStorage("product", cartStore, props.data);
+}
+
+onMounted(() => {
+  addedLike.value = checkFromLocaleStorage("like", props.data);
+});
 </script>
 
 <template>
-  <!-- <pre>{{ props.data }}</pre> -->
   <div
     class="w-full relative justify-around hover:shadow-lg shadow-gray-500 duration-500 ease-in-out cursor-pointer rounded-lg"
   >
     <!-- like -->
-    <div class="absolute top-3 right-4" @click="isLike = !isLike">
-      <i v-if="isLike" class="bx bxs-heart text-2xl text-[#7000FF]"></i>
+    <div class="absolute top-3 right-4" @click="addDataToLike">
+      <i v-if="addedLike" class="bx bxs-heart text-2xl text-[#7000FF]"></i>
       <i v-else class="bx bx-heart text-2xl text-gray-500"></i>
     </div>
     <!-- img -->
@@ -29,7 +49,7 @@ const isLike = ref(false);
     <div class="mt-[10px] p-[10px]">
       <h2>{{ props.data?.title }}</h2>
       <div class="flex mb-[10px]">
-        <box-icon class="w-[15px]" name="star"></box-icon>
+        <i class="bx bxs-star text-sm text-yellow-400"></i>
         <span class="text-[15px] text-gray-500 pl-[5px]"
           >{{ props.data?.rating }} (273 оценки)</span
         >
@@ -47,6 +67,7 @@ const isLike = ref(false);
         </div>
 
         <div
+          @click="addDataToCart"
           class="w-8 h-8 flex items-center justify-center rounded-full border border-gray-300 hover:bg-gray-200 duration-200"
         >
           <i class="bx bx-shopping-bag text-lg text-gray-800"></i>

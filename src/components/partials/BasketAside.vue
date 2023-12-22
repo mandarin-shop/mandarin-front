@@ -1,4 +1,8 @@
-<script setup></script>
+<script setup>
+const props = defineProps({
+  price: Number,
+});
+</script>
 
 <template>
   <div
@@ -9,7 +13,7 @@
       class="flex items-center justify-between text-sm text-gray-600 font-medium"
     >
       <p>Mahsulotar(2):</p>
-      <p>8 654 000 so'm</p>
+      <p>{{ props.price }} so'm</p>
     </div>
     <p
       class="text-xs text-[#7000FF] border border-[#7000FF] font-semibold mb-1 py-1 text-center rounded"

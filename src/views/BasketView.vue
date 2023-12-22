@@ -2,13 +2,38 @@
 import Title from "@/components/ui_element/Title.vue";
 import BasketCard from "@/components/card/BasketCard.vue";
 import BasketAside from "../components/partials/BasketAside.vue";
+import { useCartStore } from "@/stores/cart";
+import NotFound from "../components/ui_element/NotFound.vue";
+import Basket from "../assets/images/ui/basket.jpg";
+import { onMounted, ref, computed } from "vue";
+
+const cartStore = useCartStore();
+
+const totalPrice = ref(0);
+const getTotalPrice = () => {
+  totalPrice.value = cartStore.cartData?.reduce((acc, item) => {
+    return (acc += item?.price);
+  }, 0);
+};
+
+const getAllProducts = () => {
+  cartStore.getAll();
+};
+
+onMounted(() => {
+  getAllProducts();
+  getTotalPrice();
+});
 </script>
 
 <template>
   <main class="basket">
     <div class="container py-10">
-      <Title text="Savatingiz, 2 mahsulot" />
-      <div class="flex items-start mt-6">
+      <Title
+        v-if="cartStore.cartData?.length > 0"
+        :text="'Savatingiz, ' + cartStore.cartData?.length + ' mahsulot'"
+      />
+      <div class="flex items-start mt-6" v-if="cartStore.cartData?.length > 0">
         <div class="w-3/4 pr-3">
           <div class="border border-gray-300 p-3">
             <nav class="flex items-center justify-between pb-4 pt-1">
@@ -28,15 +53,23 @@ import BasketAside from "../components/partials/BasketAside.vue";
                 >
               </p>
             </nav>
-            <BasketCard />
-            <BasketCard />
-            <BasketCard />
+            <BasketCard
+              v-for="(item, index) in cartStore.cartData"
+              :key="index + 'sdasdfj'"
+              :data="item"
+            />
           </div>
         </div>
         <div class="w-1/4">
-          <BasketAside />
+          <BasketAside :price="totalPrice" />
         </div>
       </div>
+      <NotFound
+        v-else
+        title="Savatga qoʻshing"
+        info="Mahsulotdagi savat belgisini bosing. Akkauntga kiring va barcha tanlanganlar saqlanib qoladi"
+        :url="Basket"
+      />
     </div>
   </main>
 </template>

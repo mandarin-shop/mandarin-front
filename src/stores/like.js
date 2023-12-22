@@ -2,26 +2,48 @@ import { defineStore } from "pinia";
 
 export const useLikeStore = defineStore("like", {
   state: () => ({
-    favorites: [],
+    likeData: [],
+    length: 0,
   }),
   actions: {
-    likeProduct() {
-      this.favorites = JSON.parse(localStorage.getItem("like") || "[]");
+    // ALL DATA
+    getAll() {
+      this.likeData = JSON.parse(globalThis?.localStorage?.getItem("like"));
     },
 
-    addLike(data) {
-      const likes = JSON.parse(localStorage.getItem("like") || "[]");
-      likes.push(data);
-      this.favorites = likes;
-      localStorage.setItem("like", JSON.stringify(likes));
+    // ADD TO CART
+    addCart(data) {
+      let old = JSON.parse(globalThis?.localStorage?.getItem("like"));
+      if (this.likeData.length === 0 && old != null) {
+        this.likeData = [...old];
+      }
+      this.likeData.push(data);
+      this.saveLike();
     },
 
-    deleteLike(id) {
-      const likes = JSON.parse(localStorage.getItem("like") || "[]");
-      const newLikes = likes.filter((item) => item?.id !== id);
-      this.favorites = newLikes;
-      localStorage.setItem("like", JSON.stringify(newLikes));
+    // DELETE FROM CART
+    deleteCart(id) {
+      let old = JSON.parse(globalThis?.localStorage?.getItem("like"));
+      this.likeData = old?.filter((item) => item.id !== id);
+      this.saveLike();
+    },
+
+    // EMPTY CART
+    empty() {
+      this.likeData = [];
+      this.saveLike();
+    },
+
+    // SAVE TO LOCALSTRORAGE
+    saveLike() {
+      globalThis?.localStorage?.setItem("like", JSON.stringify(this.likeData));
     },
   },
-  getters: {},
+  getters: {
+    getLike(state) {
+      const cardDataToObj = globalThis?.localStorage?.getItem("like") || "[]";
+      state.likeData = JSON.parse(cardDataToObj);
+      return state.likeData;
+    },
+  },
 });

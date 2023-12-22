@@ -1,6 +1,10 @@
 <script setup>
 import { ref } from "vue";
+import { storeToRefs } from "pinia";
+import { useLikeStore } from "@/stores/like";
 
+const likeStore = useLikeStore();
+const { getLike } = storeToRefs(likeStore);
 const isShowCatalog = ref(false);
 
 const catefories = [
@@ -94,7 +98,15 @@ const catefories = [
           <span class="text-sm">Kirish</span>
         </div>
         <router-link to="/favorite" class="flex items-center mx-5 text-xl">
-          <i class="bx bx-heart mr-1"></i>
+          <div class="relative" :class="getLike?.length ? 'mr-2' : 'mr-1'">
+            <i class="bx bx-heart"></i>
+            <div
+              v-if="getLike?.length"
+              class="absolute top-3 -right-[5px] w-4 h-4 rounded-full bg-[#7000FF] text-[9px] text-white flex items-center justify-center font-semibold"
+            >
+              {{ getLike?.length }}
+            </div>
+          </div>
           <span class="text-sm">Saralanganlar</span>
         </router-link>
         <router-link to="/cart" class="flex items-center text-xl">

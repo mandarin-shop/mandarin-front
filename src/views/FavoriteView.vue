@@ -1,15 +1,23 @@
 <script setup>
 import GridCard from "@/components/partials/GridCard.vue";
 import NotFound from "../components/ui_element/NotFound.vue";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import Like from "@/assets/images//ui/like.png";
+import { useLikeStore } from "@/stores/like";
 
-const isFound = ref(true);
+const likeStore = useLikeStore();
+
+onMounted(() => {
+  likeStore.getAll();
+});
 </script>
 
 <template>
   <main>
-    <GridCard v-if="isFound" />
+    <GridCard
+      v-if="likeStore.likeData?.length > 0"
+      :data="likeStore.likeData"
+    />
     <NotFound
       v-else
       title="Sizga yoqqanini qoʻshing"
