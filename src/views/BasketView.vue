@@ -5,16 +5,9 @@ import BasketAside from "../components/partials/BasketAside.vue";
 import { useCartStore } from "@/stores/cart";
 import NotFound from "../components/ui_element/NotFound.vue";
 import Basket from "../assets/images/ui/basket.jpg";
-import { onMounted, ref, computed } from "vue";
+import { onMounted, ref } from "vue";
 
 const cartStore = useCartStore();
-
-const totalPrice = ref(0);
-const getTotalPrice = () => {
-  totalPrice.value = cartStore.cartData?.reduce((acc, item) => {
-    return (acc += item?.price);
-  }, 0);
-};
 
 const getAllProducts = () => {
   cartStore.getAll();
@@ -22,7 +15,6 @@ const getAllProducts = () => {
 
 onMounted(() => {
   getAllProducts();
-  getTotalPrice();
 });
 </script>
 
@@ -31,7 +23,7 @@ onMounted(() => {
     <div class="container py-10">
       <Title
         v-if="cartStore.cartData?.length > 0"
-        :text="'Savatingiz, ' + cartStore.cartData?.length + ' mahsulot'"
+        :text="'Savatingiz, ' + cartStore.cartData?.length + ' ta buyurtma'"
       />
       <div class="flex items-start mt-6" v-if="cartStore.cartData?.length > 0">
         <div class="w-3/4 pr-3">
@@ -61,7 +53,10 @@ onMounted(() => {
           </div>
         </div>
         <div class="w-1/4">
-          <BasketAside :price="totalPrice" />
+          <BasketAside
+            :price="cartStore.getTotalPrice"
+            :count="cartStore.getTotalCount"
+          />
         </div>
       </div>
       <NotFound

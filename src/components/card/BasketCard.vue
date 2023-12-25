@@ -1,20 +1,32 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
+import { useCartStore } from "@/stores/cart";
 
+const productCart = useCartStore();
 const props = defineProps({
   data: Object,
 });
 
-const count = ref(1);
+const count = ref(0);
 function increment() {
   count.value += 1;
+  productCart.counterPlus(props.data?.id, "plus");
 }
 function decrement() {
-  if (count.value == 1) {
+  if (count.value <= 1) {
     return;
   }
   count.value -= 1;
+  productCart.counterPlus(props.data?.id, "minus");
 }
+
+function deleteThis() {
+  productCart.deleteCart(props.data?.id);
+}
+
+onMounted(() => {
+  count.value = props.data?.count || 1;
+});
 </script>
 <template>
   <div class="py-4 border-t border-gray-300 flex items-center">
@@ -28,9 +40,12 @@ function decrement() {
             class="mr-2 text-gray-800"
             >{{ props.data?.title }}</router-link
           >
-          <span class="flex items-center">
-            <i class="bx bxs-trash text-2xl text-gray-500 mr-2"></i>
-            <span class="text-sm text-gray-400">Yo'q qilish</span>
+          <span
+            class="flex items-center cursor-pointer text-gray-400 hover:text-gray-700 duration-200"
+            @click="deleteThis"
+          >
+            <i class="bx bxs-trash text-xl mr-1"></i>
+            <span class="text-sm">Yo'q qilish</span>
           </span>
         </p>
         <div class="flex justify-between items-start">

@@ -8,12 +8,14 @@ export const useCartStore = defineStore("productCart", {
   actions: {
     // ALL DATA
     getAll() {
-      this.cartData = JSON.parse(globalThis?.localStorage?.getItem("product"));
+      this.cartData = JSON.parse(
+        globalThis?.localStorage?.getItem("myProduct")
+      );
     },
 
     // ADD TO CART
     addCart(data) {
-      let old = JSON.parse(globalThis?.localStorage?.getItem("product"));
+      let old = JSON.parse(globalThis?.localStorage?.getItem("myProduct"));
       if (this.cartData.length === 0 && old != null) {
         this.cartData = [...old];
       }
@@ -23,7 +25,7 @@ export const useCartStore = defineStore("productCart", {
 
     // DELETE FROM CART
     deleteCart(id) {
-      let old = JSON.parse(globalThis?.localStorage?.getItem("product"));
+      let old = JSON.parse(globalThis?.localStorage?.getItem("myProduct"));
       this.cartData = old?.filter((item) => item.id !== id);
       this.saveProduct();
     },
@@ -39,7 +41,7 @@ export const useCartStore = defineStore("productCart", {
       let index = null;
       let selectArr = null;
 
-      let old = JSON.parse(globalThis?.localStorage?.getItem("product"));
+      let old = JSON.parse(globalThis?.localStorage?.getItem("myProduct"));
       if (this.cartData.length === 0 && old != null) {
         this.cartData = [...old];
       }
@@ -63,7 +65,7 @@ export const useCartStore = defineStore("productCart", {
     // SAVE TO LOCALSTRORAGE
     saveProduct() {
       globalThis?.localStorage?.setItem(
-        "product",
+        "myProduct",
         JSON.stringify(this.cartData)
       );
     },
@@ -71,9 +73,21 @@ export const useCartStore = defineStore("productCart", {
   getters: {
     getProduct(state) {
       const cardDataToObj =
-        globalThis?.localStorage?.getItem("product") || "[]";
+        globalThis?.localStorage?.getItem("myProduct") || "[]";
       state.cartData = JSON.parse(cardDataToObj);
       return state.cartData;
+    },
+    getTotalPrice(state) {
+      const totalPrice = state.cartData?.reduce((acc, item) => {
+        return (acc += item?.price * item?.count);
+      }, 0);
+      return totalPrice;
+    },
+    getTotalCount(state) {
+      const totalCount = state.cartData?.reduce((acc, item) => {
+        return (acc += item?.count);
+      }, 0);
+      return totalCount;
     },
   },
 });

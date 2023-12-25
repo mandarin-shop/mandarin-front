@@ -16,17 +16,18 @@ const props = defineProps({
 // added like
 const addedLike = ref(false);
 function addDataToLike() {
-  addedLike.value = writeToLocaleStorage("like", likeStore, props.data);
+  addedLike.value = writeToLocaleStorage("myLike", likeStore, props.data);
 }
 
 // added cart
-// const addedLike = ref(false);
+const addedCart = ref(false);
 function addDataToCart() {
-  writeToLocaleStorage("product", cartStore, props.data);
+  addedCart.value = writeToLocaleStorage("myProduct", cartStore, props.data);
 }
 
 onMounted(() => {
-  addedLike.value = checkFromLocaleStorage("like", props.data);
+  addedLike.value = checkFromLocaleStorage("myLike", props.data);
+  addedCart.value = checkFromLocaleStorage("myProduct", props.data);
 });
 </script>
 
@@ -68,9 +69,14 @@ onMounted(() => {
 
         <div
           @click="addDataToCart"
-          class="w-8 h-8 flex items-center justify-center rounded-full border border-gray-300 hover:bg-gray-200 duration-200"
+          class="w-8 h-8 flex items-center justify-center rounded-full border duration-200"
+          :class="
+            addedCart
+              ? 'bg-[#7000FF] text-white'
+              : 'border-gray-300 hover:bg-gray-200 bg-white text-gray-800'
+          "
         >
-          <i class="bx bx-shopping-bag text-lg text-gray-800"></i>
+          <i class="bx bx-shopping-bag text-lg"></i>
         </div>
       </div>
     </div>

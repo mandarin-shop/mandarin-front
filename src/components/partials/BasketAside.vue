@@ -1,6 +1,7 @@
 <script setup>
 const props = defineProps({
   price: Number,
+  count: Number,
 });
 </script>
 
@@ -12,20 +13,31 @@ const props = defineProps({
     <div
       class="flex items-center justify-between text-sm text-gray-600 font-medium"
     >
-      <p>Mahsulotar(2):</p>
-      <p>{{ props.price }} so'm</p>
+      <p>Mahsulotlar({{ props?.count }}):</p>
+      <p>{{ props.price + 500 * (props?.count || 0) || 0 }} $</p>
     </div>
     <p
       class="text-xs text-[#7000FF] border border-[#7000FF] font-semibold mb-1 py-1 text-center rounded"
     >
-      Yetkazib berish 12 dekabr (ertaga)
+      Yetkazib berish
+      {{
+        +new Date().getDate() +
+        1 +
+        "." +
+        (+new Date().getMonth() + 1) +
+        "." +
+        new Date().getFullYear()
+      }}
+      (ertaga)
     </p>
     <div class="flex items-start justify-between mb-3">
       <p class="text-sm text-gray-500 font-medium">Jami:</p>
       <div class="text-end">
-        <p class="text-lg text-gray-800 font-semibold">4 839 000 so'm</p>
+        <p class="text-lg text-gray-800 font-semibold">
+          {{ props.price || 0 }} $
+        </p>
         <span class="text-green-500 font-medium text-xs">
-          Tejovingiz: 3 815 000 so'm
+          Tejovingiz: {{ 500 * (props?.count || 0) || 0 }} $
         </span>
       </div>
     </div>

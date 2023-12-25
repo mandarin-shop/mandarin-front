@@ -2,9 +2,12 @@
 import { ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useLikeStore } from "@/stores/like";
+import { useCartStore } from "@/stores/cart";
 
 const likeStore = useLikeStore();
+const cartStore = useCartStore();
 const { getLike } = storeToRefs(likeStore);
+const { getProduct } = storeToRefs(cartStore);
 const isShowCatalog = ref(false);
 
 const catefories = [
@@ -110,7 +113,15 @@ const catefories = [
           <span class="text-sm">Saralanganlar</span>
         </router-link>
         <router-link to="/cart" class="flex items-center text-xl">
-          <i class="bx bx-basket mr-1"></i>
+          <div class="relative" :class="getProduct?.length ? 'mr-2' : 'mr-1'">
+            <i class="bx bx-shopping-bag mr-1"></i>
+            <div
+              v-if="getProduct?.length"
+              class="absolute top-3 -right-[5px] w-4 h-4 rounded-full bg-[#7000FF] text-[9px] text-white flex items-center justify-center font-semibold"
+            >
+              {{ getProduct?.length }}
+            </div>
+          </div>
           <span class="text-sm">Savat</span>
         </router-link>
       </div>
