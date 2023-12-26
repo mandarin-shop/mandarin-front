@@ -2,11 +2,22 @@
 import Slider from "@/components/slider/Slider.vue";
 import GridCard from "@/components/partials/GridCard.vue";
 import Banner from "@/components/ui_element/Banner.vue";
-import Banner5 from "@/assets/images/banner/banner_5.jpg";
+import Rec1 from "@/assets/images/banner/rec_1.jpg";
+import Rec2 from "@/assets/images/banner/rec_2.jpg";
 import { useProductStore } from "@/stores/product";
 import { ref, onMounted } from "vue";
+import ProductSlider from "../components/slider/ProductSlider.vue";
 
 const productStore = useProductStore();
+const count = ref(10);
+
+function showAgain() {
+  if (count.value < productStore.products.data?.length - 10) {
+    count.value += 10;
+  } else {
+    count.value = productStore.products.data?.length;
+  }
+}
 
 onMounted(() => {
   productStore.getProducts();
@@ -17,10 +28,34 @@ onMounted(() => {
     <div class="container pt-2 pb-16">
       <Slider />
     </div>
-    <GridCard title="Katta sotuvlar" :data="productStore.products.data" />
-    <Banner link="/category" :img="Banner5" class="mb-10" />
-    <GridCard title="Muddatli to'lov" :data="productStore.products.data" />
-    <Banner link="/category" :img="Banner5" class="mb-10" />
+    <template v-if="productStore.products.data">
+      <GridCard
+        title="Katta sotuvlar"
+        :data="productStore.products.data.slice(0, count)"
+      />
+      <LinkBtn
+        v-if="productStore.products.data?.length - count > 0"
+        @click="showAgain"
+        class="w-1/2 block mx-auto bg-gray-200 mb-10 hover:bg-gray-300 duration-200"
+      >
+        Yana ko'rstish {{ productStore.products.data?.length - count }}
+      </LinkBtn>
+      <router-link to="/category" v-else>
+        <LinkBtn
+          class="w-1/2 block mx-auto bg-gray-200 mb-10 hover:bg-gray-300 duration-200"
+        >
+          To'liq maxsulotlarni ko'rish
+        </LinkBtn>
+      </router-link>
+    </template>
+    <template v-else> Empty Data </template>
+    <ProductSlider word="laptops" title="Noutbuklar" class="mb-14" />
+    <Banner link="/category" :img="Rec1" class="mb-10" />
+    <ProductSlider word="smartphones" title="Smartfonlar" class="mb-14" />
+    <ProductSlider word="mens-shoes" title="Oyoq kiyimlar" class="mb-14" />
+    <Banner link="/category" :img="Rec2" class="mb-10" />
+    <ProductSlider word="tops" title="Top maxsulotlar" class="mb-8" />
+    <!-- <GridCard title="Muddatli to'lov" :data="productStore.products.data" /> -->
   </div>
 </template>
 
