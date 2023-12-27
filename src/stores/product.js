@@ -37,7 +37,6 @@ export const useProductStore = defineStore("product", {
     async getTop(word) {
       try {
         const res = await axios.get(`/products/category/${word}`);
-        console.log(res.data.products);
         return res.data.products;
       } catch (error) {
         this.products.error = error;

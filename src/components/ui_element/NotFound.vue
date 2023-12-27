@@ -8,7 +8,11 @@ const props = defineProps({
 
 <template>
   <div class="w-full h-[60vh] flex flex-col items-center justify-center">
-    <img :src="props.url" alt="img" class="w-[150px] mb-2" />
+    <img
+      src="../../assets//images/ui/basket.jpg"
+      alt="img"
+      class="w-[150px] mb-2"
+    />
     <h2 class="text-center text-2xl font-semibold text-gray-900">
       {{ props.title }}
     </h2>

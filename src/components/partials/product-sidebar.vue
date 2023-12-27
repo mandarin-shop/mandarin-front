@@ -1,4 +1,19 @@
-<script setup></script>
+<script setup>
+import { useCategoryStore } from "@/stores/category";
+import { useRouter } from "vue-router";
+
+const categoryStore = useCategoryStore();
+const router = useRouter();
+
+const getByFilter = (queryString) => {
+  router.push({
+    name: "category",
+    query: {
+      filter: queryString,
+    },
+  });
+};
+</script>
 
 <template>
   <aside class="h-auto bg-purple pr-4 pb-6 flex flex-col">
@@ -10,30 +25,14 @@
         >
           <span>Все категории</span>
         </li>
+
         <li
+          v-for="(item, index) in categoryStore.categories.data"
+          :key="index + '-aside-item'"
+          @click="getByFilter(item)"
           class="mt-[5px] hover:bg-slate-200 rounded-md active:bg-slate-100 px-2 py-[5px]"
         >
-          <span>Электроника</span>
-        </li>
-        <li
-          class="mt-[5px] hover:bg-slate-200 rounded-md active:bg-slate-100 px-2 py-[5px]"
-        >
-          <span>Аксессуары для электроники</span>
-        </li>
-        <li
-          class="mt-[5px] hover:bg-slate-200 rounded-md active:bg-slate-100 px-2 py-[5px]"
-        >
-          <span>Компьютерная техника</span>
-        </li>
-        <li
-          class="mt-[5px] hover:bg-slate-200 rounded-md active:bg-slate-100 px-2 py-[5px]"
-        >
-          <span>Наушники и аудиотехника</span>
-        </li>
-        <li
-          class="mt-[5px] hover:bg-slate-200 rounded-md active:bg-slate-100 px-2 py-[5px]"
-        >
-          <span>Смартфоны и телефоны</span>
+          <span>{{ item }}</span>
         </li>
       </ol>
     </div>

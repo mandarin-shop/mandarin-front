@@ -1,35 +1,31 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { storeToRefs } from "pinia";
 import { useLikeStore } from "@/stores/like";
 import { useCartStore } from "@/stores/cart";
+import { useCategoryStore } from "@/stores/category";
+import { useRouter } from "vue-router";
 
 const likeStore = useLikeStore();
 const cartStore = useCartStore();
+const categoryStore = useCategoryStore();
 const { getLike } = storeToRefs(likeStore);
 const { getProduct } = storeToRefs(cartStore);
 const isShowCatalog = ref(false);
+const router = useRouter();
 
-const catefories = [
-  "Elektronika",
-  "Maishiy texnika",
-  "Kiyim",
-  "Poyabzallar",
-  "Elektronika",
-  "Maishiy texnika",
-  "Kiyim",
-  "Poyabzallar",
-  "Elektronika",
-  "Maishiy texnika",
-  "Kiyim",
-  "Poyabzallar",
-  "Kiyim",
-  "Poyabzallar",
-  "Elektronika",
-  "Maishiy texnika",
-  "Kiyim",
-  "Poyabzallar",
-];
+const goToFilter = (queryString) => {
+  router.push({
+    name: "category",
+    query: {
+      filter: queryString,
+    },
+  });
+};
+
+onMounted(() => {
+  categoryStore.getCategory();
+});
 </script>
 <template>
   <header class="header bg-white">
@@ -78,7 +74,8 @@ const catefories = [
           @click="isShowCatalog = !isShowCatalog"
           class="py-2 px-6 border-none outline-none bg-[#F0F0FF] rounded mr-4 text-[#7000FF] text-sm flex items-center"
         >
-          <i class="bx bx-category-alt mr-2"></i>
+          <i v-if="!isShowCatalog" class="bx bx-category-alt mr-2"></i>
+          <i v-else class="bx bx-x mr-2"></i>
           <span class="font-semibold">Katalog</span>
         </button>
         <div class="flex">
@@ -96,7 +93,7 @@ const catefories = [
       </div>
 
       <div class="flex items-center">
-        <div to="/" class="flex items-center text-xl">
+        <div to="/" class="flex items-center text-xl cursor-pointer">
           <i class="bx bx-user mr-1"></i>
           <span class="text-sm">Kirish</span>
         </div>
@@ -128,56 +125,21 @@ const catefories = [
     </div>
     <!-- nav -->
     <nav class="pb-3 container flex items-center justify-between">
-      <router-link
-        to="/category"
-        class="nav_category relative text-gray-500 hover:text-black duration-200"
-        >Elektronika</router-link
+      <span
+        v-for="(item, index) in categoryStore.categories.data?.slice(0, 12)"
+        :key="index + '-link-item'"
+        @click="goToFilter(item)"
+        class="nav_category relative text-gray-500 hover:text-black duration-200 capitalize cursor-pointer"
       >
-      <router-link
-        to="/category"
-        class="nav_category relative text-gray-500 hover:text-black duration-200"
-        >Maishiy texnika</router-link
+        {{ item }}
+      </span>
+      <span
+        @click="isShowCatalog = !isShowCatalog"
+        class="flex items-center cursor-pointer text-gray-500 hover:text-black duration-200 capitalize"
       >
-      <router-link
-        to="/category"
-        class="nav_category relative text-gray-500 hover:text-black duration-200"
-        >Kiyim</router-link
-      >
-      <router-link
-        to="/category"
-        class="nav_category relative text-gray-500 hover:text-black duration-200"
-        >Poyafzallar</router-link
-      >
-      <router-link
-        to="/category"
-        class="nav_category relative text-gray-500 hover:text-black duration-200"
-        >Aksesuarlar</router-link
-      >
-      <router-link
-        to="/category"
-        class="nav_category relative text-gray-500 hover:text-black duration-200"
-        >Uy-ro'zg'or buyumlari</router-link
-      >
-      <router-link
-        to="/category"
-        class="nav_category relative text-gray-500 hover:text-black duration-200"
-        >Go'zallik va parvarish</router-link
-      >
-      <router-link
-        to="/category"
-        class="nav_category relative text-gray-500 hover:text-black duration-200"
-        >Salomatlik</router-link
-      >
-      <router-link
-        to="/category"
-        class="nav_category relative text-gray-500 hover:text-black duration-200"
-        >Qurilish va tamirlash</router-link
-      >
-      <router-link
-        to="/category"
-        class="nav_category relative text-gray-500 hover:text-black duration-200"
-        >Yana</router-link
-      >
+        <span class="mr-1">Yana</span>
+        <i class="bx bx-chevron-down text-sm"></i>
+      </span>
     </nav>
   </header>
 
@@ -189,12 +151,23 @@ const catefories = [
     <div class="container h-full">
       <div class="flex relative h-full">
         <ul class="categories_menu w-1/4 h-full overflow-y-auto">
+          <li class="menu-item py-3 px-5 hover:bg-[#F0F0FF] text-[#7000FF]">
+            <div class="flex items-center justify-between">
+              <span>All</span>
+              <i class="bx bx-chevron-right text-lg"></i>
+            </div>
+            <div
+              class="sub_menu absolute top-0 left-1/4 bg-[#F0F0FF] h-full w-3/4 p-4"
+            >
+              All
+            </div>
+          </li>
           <li
-            v-for="(item, index) in catefories"
-            :key="index + '-dasdfc'"
+            v-for="(item, index) in categoryStore.categories.data"
+            :key="index + '-category-item'"
             class="menu-item py-3 px-5 hover:bg-[#F0F0FF] text-[#7000FF]"
           >
-            <div class="flex items-center justify-between">
+            <div class="flex items-center justify-between cursor-pointer">
               <span>{{ item }}</span>
               <i class="bx bx-chevron-right text-lg"></i>
             </div>
