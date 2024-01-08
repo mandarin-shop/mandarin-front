@@ -167,7 +167,7 @@ const catefories = [
         >Yana</router-link
       >
     </nav>
-
+    <!-- login modal -->
     <section
       v-if="showLoginModal"
       class="modal w-full h-screen fixed z-50 flex items-center justify-center top-0 left-0"
