@@ -6,24 +6,29 @@ const categoryStore = useCategoryStore();
 const router = useRouter();
 
 const getByFilter = (queryString) => {
-  router.push({
-    name: "category",
-    query: {
-      filter: queryString,
-    },
-  });
+  if (queryString) {
+    router.push({
+      name: "category",
+      query: {
+        filter: queryString,
+      },
+    });
+  } else {
+    router.push({ name: "category" });
+  }
 };
 </script>
 
 <template>
   <aside class="h-auto bg-purple pr-4 pb-6 flex flex-col">
-    <h2 class="text-lg mb-3 font-semibold">Категории</h2>
+    <h2 class="text-lg mb-3 font-semibold">Kategoriyalar</h2>
     <div class="text-gray-700 pl-4">
       <ol class="list-none cursor-pointer">
         <li
+          @click="getByFilter(item)"
           class="mt-[5px] hover:bg-slate-200 rounded-md active:bg-slate-100 px-2 py-[5px]"
         >
-          <span>Все категории</span>
+          <span>Barcha maxsulotlar</span>
         </li>
 
         <li
@@ -56,7 +61,7 @@ const getByFilter = (queryString) => {
       </div>
     </div>
     <h2 class="text-lg mt-[30px] font-semibold">Бренд</h2>
-    <div class="mt-4">
+    <div class="pl-6 mt-4">
       <div class="flex gap-x-3 mb-2 items-center">
         <input class="w-4 h-4" type="checkbox" name="" id="FPB" />
         <label for="FPB">FPB</label>

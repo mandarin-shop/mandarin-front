@@ -1,4 +1,5 @@
 @import "./base.css";
+@import "./pagination.css";
 
 @tailwind base;
 @tailwind components;

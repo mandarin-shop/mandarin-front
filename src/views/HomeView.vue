@@ -7,6 +7,8 @@ import Rec2 from "@/assets/images/banner/rec_2.jpg";
 import { useProductStore } from "@/stores/product";
 import { ref, onMounted } from "vue";
 import ProductSlider from "../components/slider/ProductSlider.vue";
+import Loader from "@/components/ui_element/Loader.vue";
+import NotFound from "@/components/ui_element/NotFound.vue";
 
 const productStore = useProductStore();
 const count = ref(10);
@@ -28,7 +30,8 @@ onMounted(() => {
     <div class="container pt-2 pb-16">
       <Slider />
     </div>
-    <template v-if="productStore.products.data">
+    <Loader v-if="productStore.products.loading" />
+    <template v-else-if="productStore.products.data?.length > 0">
       <GridCard
         title="Katta sotuvlar"
         :data="productStore.products.data.slice(0, count)"
@@ -48,7 +51,12 @@ onMounted(() => {
         </LinkBtn>
       </router-link>
     </template>
-    <template v-else> Empty Data </template>
+    <template v-else>
+      <NotFound
+        title="Maxsulotlar topilmadi"
+        info="Elektron do'konga hali maxsulotlar qo'shilmagan"
+      />
+    </template>
     <ProductSlider word="laptops" title="Noutbuklar" class="mb-14" />
     <Banner link="/category" :img="Rec1" class="mb-10" />
     <ProductSlider word="smartphones" title="Smartfonlar" class="mb-14" />

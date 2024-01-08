@@ -1,5 +1,6 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
+import Paginate from "vuejs-paginate-next";
 
 import App from "./App.vue";
 import router from "./router";
@@ -12,5 +13,5 @@ app.component("LinkBtn", LinkBtn);
 
 app.use(createPinia());
 app.use(router);
-
+app.use(Paginate);
 app.mount("#app");

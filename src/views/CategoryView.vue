@@ -7,13 +7,28 @@ import { useProductStore } from "@/stores/product";
 import Loader from "@/components/ui_element/Loader.vue";
 import NotFound from "@/components/ui_element/NotFound.vue";
 import { useCategoryStore } from "@/stores/category";
-const categoryStore = useCategoryStore();
+import Paginate from "vuejs-paginate-next";
 
+const categoryStore = useCategoryStore();
 const route = useRoute();
 const productStore = useProductStore();
+const page = ref(0);
+const limit = 10;
+
 const getAll = () => {
-  productStore.getByFilter(route.query?.filter);
+  if (route.query?.filter) {
+    page.value = 0;
+    productStore.getByFilter(route.query?.filter, limit, limit * page.value);
+  } else {
+    page.value = 0;
+    productStore.getProducts(limit, limit * page.value);
+  }
 };
+
+const paginationFunction = () => {
+  console.log(page.value);
+};
+
 const selectCategory = (e) => {
   productStore.getByFilter(e.target.value);
 };
@@ -32,7 +47,7 @@ onMounted(() => {
   <div class="category">
     <div class="container flex pt-4">
       <ProductSidebar class="w-[300px]" />
-      <div class="content">
+      <div class="content pb-10">
         <!-- title -->
         <div class="px-1 mb-3">
           <h1 class="text-2xl font-bold capitalize">
@@ -60,7 +75,7 @@ onMounted(() => {
 
         <!-- grid -->
         <Loader v-if="productStore.products.loading" />
-        <div v-else>
+        <div class="mb-8" v-else>
           <div
             v-if="productStore.products.data?.length > 0"
             class="flex flex-wrap"
@@ -80,6 +95,21 @@ onMounted(() => {
             info="Boshqa turdagi maxsulotlarni harid qilishingiz"
           />
         </div>
+
+        <!-- pagination -->
+        <Paginate
+          v-if="productStore.products.total / limit > 1"
+          v-model="page"
+          :page-count="Math.ceil(productStore.products.total / limit)"
+          :page-range="3"
+          :margin-pages="2"
+          :click-handler="paginationFunction"
+          :prev-text="'Prev'"
+          :next-text="'Next'"
+          :container-class="'pagination'"
+          :page-class="'page-item'"
+        >
+        </Paginate>
       </div>
     </div>
   </div>
