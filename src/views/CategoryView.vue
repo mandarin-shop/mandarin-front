@@ -19,6 +19,9 @@ const getAll = () => {
   if (route.query?.filter) {
     page.value = 0;
     productStore.getByFilter(route.query?.filter, limit, limit * page.value);
+  } else if (route.query?.search) {
+    page.value = 0;
+    productStore.getBySearch(route.query?.search);
   } else {
     page.value = 0;
     productStore.getProducts(limit, limit * page.value);
@@ -35,7 +38,7 @@ const selectCategory = (e) => {
 
 const query = ref("");
 onUpdated(() => {
-  query.value = route.query?.filter;
+  query.value = route.query?.filter || route.query?.search;
 });
 watch(query, getAll);
 
@@ -51,7 +54,7 @@ onMounted(() => {
         <!-- title -->
         <div class="px-1 mb-3">
           <h1 class="text-2xl font-bold capitalize">
-            {{ route.query?.filter }}
+            {{ route.query?.filter || "Qidiruv: " + route.query?.search }}
           </h1>
           <p class="text-gray-400">
             {{ productStore.products.data?.length || 0 }}ta tovar

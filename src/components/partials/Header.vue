@@ -1,4 +1,8 @@
 <script setup>
+import { useLogin } from "@/composables/Login";
+
+const { showLoginModal, onSubmitLogin } = useLogin();
+
 import { ref, onMounted } from "vue";
 import { storeToRefs } from "pinia";
 import { useLikeStore } from "@/stores/like";
@@ -23,8 +27,27 @@ const goToFilter = (queryString) => {
   });
 };
 
+const seachText = ref("");
+const goToSearch = () => {
+  if (seachText.value) {
+    router.push({
+      name: "category",
+      query: {
+        search: seachText.value,
+      },
+    });
+    seachText.value = "";
+  }
+};
+
 onMounted(() => {
   categoryStore.getCategory();
+
+  window.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+      goToSearch();
+    }
+  });
 });
 </script>
 <template>
@@ -78,13 +101,16 @@ onMounted(() => {
           <i v-else class="bx bx-x mr-2"></i>
           <span class="font-semibold">Katalog</span>
         </button>
+
         <div class="flex">
           <input
             type="text"
             class="py-2 px-4 border border-gray-300 border-r-0 outline-none placeholder:text-gray-600 rounded-l text-[#7000FF] text-sm bg-white w-[500px]"
             placeholder="Maxsulotlar va turkumlar izlash"
+            v-model="seachText"
           />
           <button
+            @click="goToSearch"
             class="w-[80px] py-2 px-6 border border-gray-300 border-l-0 outline-none bg-[#F0F0FF] rounded-r text-gray-600 text-sm"
           >
             <i class="bx bx-search scale-150"></i>
@@ -93,8 +119,12 @@ onMounted(() => {
       </div>
 
       <div class="flex items-center">
-        <div to="/" class="flex items-center text-xl cursor-pointer">
-          <i class="bx bx-user mr-1"></i>
+        <div
+          to="/"
+          class="flex items-center text-xl cursor-pointer"
+          @click="showLoginModal = true"
+        >
+          <i class="bx bx-user mr-2"></i>
           <span class="text-sm">Kirish</span>
         </div>
         <router-link to="/favorite" class="flex items-center mx-5 text-xl">
@@ -141,41 +171,89 @@ onMounted(() => {
         <i class="bx bx-chevron-down text-sm"></i>
       </span>
     </nav>
+    <!-- login modal -->
+    <section
+      v-if="showLoginModal"
+      class="modal w-full h-screen fixed z-50 flex items-center justify-center top-0 left-0"
+    >
+      <div class="w-[30%] bg-white rounded-xl h-auto p-7">
+        <div class="text-right">
+          <button
+            class="py-1 px-2.5 bg-gray-300 rounded-full text-gray-500 font-bold"
+            @click="showLoginModal = false"
+          >
+            X
+          </button>
+        </div>
+        <form @submit.prevent="onSubmitLogin" class="text-left">
+          <div>
+            <h2 class="text-2xl font-semibold mb-3">Введите номер телефона</h2>
+            <p class="text-[18px] text-gray-700 mb-7">
+              Отправим смс с кодом подтверждения
+            </p>
+            <input
+              class="bg-gray-200 p-3 w-full block rounded-lg mb-7"
+              placeholder="+998 00 000-00-00"
+              type="tel"
+              name=""
+              id=""
+            />
+            <button
+              class="w-full bg-blue-600 p-3 rounded-lg text-white text-xl mb-32"
+            >
+              Получить код
+            </button>
+          </div>
+          <div class="text-center">
+            <p>Авторизуясь, вы соглашаетесь</p>
+            <a class="text-blue-400" href="/"
+              >c политикой обработки персональных данных</a
+            >
+          </div>
+        </form>
+      </div>
+    </section>
   </header>
 
   <!-- category sub menu -->
   <section
     v-if="isShowCatalog"
-    class="catalogs w-full bg-white absolute left-0 z-30"
+    class="catalogs w-full bg-[#00000057] absolute left-0 z-30"
+    @click="isShowCatalog = !isShowCatalog"
   >
     <div class="container h-full">
       <div class="flex relative h-full">
-        <ul class="categories_menu w-1/4 h-full overflow-y-auto">
-          <li class="menu-item py-3 px-5 hover:bg-[#F0F0FF] text-[#7000FF]">
+        <ul
+          class="categories_menu w-[20%] h-full overflow-y-auto bg-white absolute top-0 left-[16.5%]"
+        >
+          <li class="menu-item py-1 px-4 hover:bg-[#F0F0FF] text-[#7000FF]">
             <div class="flex items-center justify-between">
               <span>All</span>
-              <i class="bx bx-chevron-right text-lg"></i>
+              <!-- <i class="bx bx-chevron-right text-lg"></i> -->
             </div>
-            <div
+            <!-- <div
               class="sub_menu absolute top-0 left-1/4 bg-[#F0F0FF] h-full w-3/4 p-4"
             >
               All
-            </div>
+            </div> -->
           </li>
           <li
             v-for="(item, index) in categoryStore.categories.data"
             :key="index + '-category-item'"
-            class="menu-item py-3 px-5 hover:bg-[#F0F0FF] text-[#7000FF]"
+            class="menu-item py-1 px-4 hover:bg-[#F0F0FF] text-[#7000FF]"
+            @click="goToFilter(item)"
           >
-            <div class="flex items-center justify-between cursor-pointer">
-              <span>{{ item }}</span>
-              <i class="bx bx-chevron-right text-lg"></i>
-            </div>
             <div
+              class="flex items-center justify-between cursor-pointer capitalize"
+            >
+              <span>{{ item }}</span>
+              <!-- <i class="bx bx-chevron-right text-lg"></i> -->
+            </div>
+            <!-- <div
               class="sub_menu absolute top-0 left-1/4 bg-[#F0F0FF] h-full w-3/4 p-4"
             >
               {{ item }}
-            </div>
+            </div> -->
           </li>
         </ul>
       </div>
@@ -211,5 +289,8 @@ onMounted(() => {
 }
 .categories_menu::-webkit-scrollbar {
   display: none;
+}
+.modal {
+  background-color: #00000073;
 }
 </style>

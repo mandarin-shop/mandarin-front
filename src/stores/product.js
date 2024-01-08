@@ -37,7 +37,19 @@ export const useProductStore = defineStore("product", {
           `/products/category/${filter}?limit=${limit}&skip=${skip}`
         );
         this.products.data = res.data.products;
-        console.log(res.data);
+        this.products.total = res.data.total;
+      } catch (error) {
+        this.products.error = error;
+      } finally {
+        this.products.loading = false;
+      }
+    },
+
+    async getBySearch(searchText) {
+      this.products.loading = true;
+      try {
+        const res = await axios.get(`/products/search?q=${searchText}`);
+        this.products.data = res.data.products;
         this.products.total = res.data.total;
       } catch (error) {
         this.products.error = error;

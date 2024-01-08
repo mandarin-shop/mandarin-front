@@ -5,7 +5,8 @@ import BasketAside from "../components/partials/BasketAside.vue";
 import { useCartStore } from "@/stores/cart";
 import NotFound from "../components/ui_element/NotFound.vue";
 import Basket from "../assets/images/ui/basket.jpg";
-import { onMounted, ref } from "vue";
+import { onMounted } from "vue";
+import ProductSlider from "@/components/slider/ProductSlider.vue";
 
 const cartStore = useCartStore();
 
@@ -66,6 +67,7 @@ onMounted(() => {
         :url="Basket"
       />
     </div>
+    <ProductSlider word="tops" title="Top maxsulotlar" class="mb-8" />
   </main>
 </template>
 
