@@ -32,7 +32,9 @@ onMounted(() => {
   <div class="py-4 border-t border-gray-300 flex items-center">
     <input type="checkbox" class="w-5 h-5 mr-10" />
     <div class="content flex items-start">
-      <img :src="props.data?.thumbnail" alt="cart-img" class="w-[100px]" />
+      <router-link :to="'/products/' + props.data?.id">
+        <img :src="props.data?.thumbnail" alt="cart-img" class="w-[100px]" />
+      </router-link>
       <div class="info pl-10">
         <p class="w-full flex items-center justify-between mb-4">
           <router-link

@@ -41,14 +41,18 @@ onMounted(() => {
       <i v-else class="bx bx-heart text-2xl text-gray-500"></i>
     </div>
     <!-- img -->
-    <img
-      class="rounded-lg w-full h-[250px] object-cover border border-gray-300"
-      :src="props.data?.thumbnail"
-      alt="product-img"
-    />
+    <router-link :to="'/products/' + props.data?.id" class="block w-full">
+      <img
+        class="rounded-lg w-full h-[250px] object-cover border border-gray-300"
+        :src="props.data?.thumbnail"
+        alt="product-img"
+      />
+    </router-link>
     <!-- info -->
     <div class="mt-[10px] p-[10px]">
-      <h2>{{ props.data?.title }}</h2>
+      <router-link :to="'/products/' + props.data?.id">
+        <h2>{{ props.data?.title }}</h2>
+      </router-link>
       <div class="flex mb-[10px]">
         <i class="bx bxs-star text-sm text-yellow-400"></i>
         <span class="text-[15px] text-gray-500 pl-[5px]"

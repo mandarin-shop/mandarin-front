@@ -23,6 +23,15 @@ const router = createRouter({
       name: "cart",
       component: () => import("../views/BasketView.vue"),
     },
+    {
+      path: "/products",
+      redirect: "/category",
+    },
+    {
+      path: "/products/:id",
+      name: "single-product",
+      component: () => import("../views/SingleView.vue"),
+    },
   ],
 });
 
