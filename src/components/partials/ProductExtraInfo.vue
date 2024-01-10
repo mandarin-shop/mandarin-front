@@ -5,6 +5,9 @@ import ProductDesc from "../card/ProductDesc.vue";
 import ProductCommentCard from "../card/ProductCommentCard.vue";
 
 const { boolean1, boolean2, onComm, onDesc, activeTab } = UseProduct();
+const props = defineProps({
+  info: Object,
+});
 </script>
 
 <template>
@@ -28,7 +31,10 @@ const { boolean1, boolean2, onComm, onDesc, activeTab } = UseProduct();
       </div>
     </div>
     <div class="px-5" v-if="boolean1">
-      <ProductDesc />
+      <ProductDesc
+        :text="props.info?.description"
+        :img="props.info?.thumbnail"
+      />
     </div>
     <div v-if="boolean2" class="p-5 pt-8 xl:pl-80 lg:pl-40 md:pl-">
       <h2 class="text-2xl text-gray-800 title-card pb-5 w-[70%]">

@@ -1,84 +1,72 @@
 <script setup>
 import { ref } from "vue";
 
-const images = ref([
-  "https://images.uzum.uz/clo4nqlenntcj8aah5h0/original.jpg",
-  "https://images.uzum.uz/clo4not6sfhsc0ung4eg/original.jpg",
-  "https://images.uzum.uz/clo4nq56sfhsc0ung4fg/original.jpg",
-  "https://images.uzum.uz/clpchfdenntcj8aapo7g/original.jpg",
-  "https://images.uzum.uz/clpdea9s99oopol15afg/original.jpg",
-  "https://images.uzum.uz/clpdea9s99oopol15ag0/original.jpg",
-  "https://images.uzum.uz/clpdea9s99oopol15af0/original.jpg",
-]);
+const props = defineProps({
+  images: Array,
+});
 
 const currentIndex = ref(0);
-const img = ref(images.value[0]);
+const img = ref(null);
 
 function selectImg(i) {
   currentIndex.value = i;
-  img.value = images.value[i];
+  img.value = props?.images[i];
 }
 function changedByArrow(str) {
   if (str == "next") {
-    currentIndex.value += 1;
+    if (currentIndex.value !== props.images?.length - 1) {
+      currentIndex.value += 1;
+    } else {
+      currentIndex.value = 0;
+    }
   } else {
-    currentIndex.value -= 1;
+    if (currentIndex.value === 0) {
+      currentIndex.value = props.images?.length - 1;
+    } else {
+      currentIndex.value -= 1;
+    }
   }
-  img.value = images.value[Math.abs(currentIndex.value) % images.value.length];
+  img.value =
+    props?.images[Math.abs(currentIndex.value) % props?.images.length];
 }
 </script>
 
 <template>
   <section class="flex">
-    <transition-group
-      name="fade"
-      tag="div"
-      class="sidebar flex flex-col gap-2 max-h-[430px] overflow-y-scroll sticky"
+    <div
+      class="w-1/4 sidebar flex flex-col gap-2 max-h-[430px] overflow-y-scroll sticky"
     >
-      <div v-for="(image, index) in images" :key="index">
+      <img
+        v-for="(image, index) in props?.images"
+        :key="index"
+        @click="selectImg(index)"
+        class="w-full h-[100px] object-cover bg-gray-100"
+        :src="image"
+        :class="index == currentIndex ? 'border-2 border-[#7000FF]' : ''"
+      />
+    </div>
+    <div class="w-3/4">
+      <div class="h-[430px] relative px-4" v-for="i in [currentIndex]" :key="i">
+        <span
+          class="text-lg cursor-pointer text-gray-100 font-bold absolute top-1/2 left-2 -translate-y-1/2 bg-gray-600 w-8 h-8 rounded-full flex items-center justify-center"
+          @click="changedByArrow('prev')"
+          >&#10094;
+        </span>
         <img
-          @click="selectImg(index)"
-          class="w-full h-[100px]"
-          :src="image"
-          :class="index == currentIndex ? 'border border-red-500' : ''"
+          class="w-full h-full object-cover bg-gray-100"
+          :src="img || (props.images?.length && props.images[0])"
         />
+        <span
+          class="text-lg cursor-pointer text-gray-100 font-bold absolute top-1/2 right-2 -translate-y-1/2 bg-gray-600 w-8 h-8 rounded-full flex items-center justify-center"
+          @click="changedByArrow('next')"
+          >&#10095;
+        </span>
       </div>
-    </transition-group>
-    <transition-group name="fade" tag="div">
-      <div class="flex h-[430px]" v-for="i in [currentIndex]" :key="i">
-        <a class="prev" @click="changedByArrow('prev')" href="#">&#10094; </a>
-        <img class="w-full h-full" :src="img" />
-        <a class="next" @click="changedByArrow('next')" href="#">&#10095; </a>
-      </div>
-    </transition-group>
+    </div>
   </section>
 </template>
 
 <style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: all 0.9s ease;
-  overflow: hidden;
-  visibility: visible;
-  position: absolute;
-  opacity: 1;
-}
-.prev,
-.next {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  top: 40%;
-  width: auto;
-  padding: 16px;
-  color: blue;
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.7s ease;
-  border-radius: 4px 0px 0px 4px;
-  text-decoration: none;
-  user-select: none;
-}
 .sidebar::-webkit-scrollbar {
   display: none;
 }

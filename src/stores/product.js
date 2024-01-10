@@ -9,6 +9,11 @@ export const useProductStore = defineStore("product", {
       error: null,
       total: 0,
     },
+    product: {
+      loading: false,
+      data: null,
+      error: null,
+    },
   }),
   actions: {
     async getProducts(limit, skip) {
@@ -27,6 +32,18 @@ export const useProductStore = defineStore("product", {
         this.products.error = error;
       } finally {
         this.products.loading = false;
+      }
+    },
+
+    async getById(id) {
+      this.product.loading = true;
+      try {
+        const res = await axios.get(`/products/${id}`);
+        this.product.data = res.data;
+      } catch (error) {
+        this.product.error = error;
+      } finally {
+        this.product.loading = false;
       }
     },
 
