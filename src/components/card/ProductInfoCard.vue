@@ -39,7 +39,7 @@ const props = defineProps({
       <button
         class="outline-none border border-[#7000ff] text-[#7000ff] font-semibold text-lg rounded-lg py-4 w-1/2"
       >
-        Savatga qo'shish
+        Xarid qilish
       </button>
     </div>
     <div class="bg-red-100 py-2 px-8 rounded-lg flex items-center">

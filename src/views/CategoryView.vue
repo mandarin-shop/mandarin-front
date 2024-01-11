@@ -33,7 +33,8 @@ const paginationFunction = () => {
 };
 
 const selectCategory = (e) => {
-  productStore.getByFilter(e.target.value);
+  page.value = 0;
+  productStore.getByFilter(e.target.value, limit, limit * page.value);
 };
 
 const query = ref("");
