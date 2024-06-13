@@ -6,6 +6,7 @@ import Header from "@/components/partials/Header.vue";
 <template>
   <Header />
   <main class="main">
+    <!-- test -->
     <RouterView />
   </main>
   <Footer />
