@@ -34,10 +34,10 @@ const getByFilter = (queryString) => {
         <li
           v-for="(item, index) in categoryStore.categories.data"
           :key="index + '-aside-item'"
-          @click="getByFilter(item)"
+          @click="getByFilter(item.name)"
           class="mt-[5px] hover:bg-slate-200 rounded-md active:bg-slate-100 px-2 py-[5px]"
         >
-          <span>{{ item }}</span>
+          <span>{{ item.name }}</span>
         </li>
       </ol>
     </div>

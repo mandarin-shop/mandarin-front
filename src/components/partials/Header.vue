@@ -161,7 +161,7 @@ onMounted(() => {
         @click="goToFilter(item)"
         class="nav_category relative text-gray-500 hover:text-black duration-200 capitalize cursor-pointer"
       >
-        {{ item }}
+        {{ item.name }}
       </span>
       <span
         @click="isShowCatalog = !isShowCatalog"
@@ -246,7 +246,7 @@ onMounted(() => {
             <div
               class="flex items-center justify-between cursor-pointer capitalize"
             >
-              <span>{{ item }}</span>
+              <span>{{ item.name }}</span>
               <!-- <i class="bx bx-chevron-right text-lg"></i> -->
             </div>
             <!-- <div

@@ -55,7 +55,7 @@ onMounted(() => {
         <!-- title -->
         <div class="px-1 mb-3">
           <h1 class="text-2xl font-bold capitalize">
-            {{ route.query?.filter || "Qidiruv: " + route.query?.search }}
+            {{ route.query?.filter || "Qidiruv: All" }}
           </h1>
           <p class="text-gray-400">
             {{ productStore.products.data?.length || 0 }}ta tovar
@@ -69,10 +69,10 @@ onMounted(() => {
             <option
               v-for="(item, index) in categoryStore.categories.data"
               :key="index + '-select-item'"
-              :value="item"
+              :value="item.name"
               class="text-capitalize"
             >
-              {{ item }}
+              {{ item.name }}
             </option>
           </select>
         </div>
