@@ -158,10 +158,10 @@ onMounted(() => {
       <span
         v-for="(item, index) in categoryStore.categories.data?.slice(0, 12)"
         :key="index + '-link-item'"
-        @click="goToFilter(item)"
+        @click="goToFilter(item?.name || '')"
         class="nav_category relative text-gray-500 hover:text-black duration-200 capitalize cursor-pointer"
       >
-        {{ item }}
+        {{ item.name }}
       </span>
       <span
         @click="isShowCatalog = !isShowCatalog"
@@ -226,7 +226,10 @@ onMounted(() => {
         <ul
           class="categories_menu w-[20%] h-full overflow-y-auto bg-white absolute top-0 left-[16.5%]"
         >
-          <li class="menu-item py-1 px-4 hover:bg-[#F0F0FF] text-[#7000FF]">
+          <li
+            class="menu-item py-1 px-4 hover:bg-[#F0F0FF] text-[#7000FF]"
+            @click="goToFilter('')"
+          >
             <div class="flex items-center justify-between">
               <span>All</span>
               <!-- <i class="bx bx-chevron-right text-lg"></i> -->
@@ -241,12 +244,12 @@ onMounted(() => {
             v-for="(item, index) in categoryStore.categories.data"
             :key="index + '-category-item'"
             class="menu-item py-1 px-4 hover:bg-[#F0F0FF] text-[#7000FF]"
-            @click="goToFilter(item)"
+            @click="goToFilter(item?.name || '')"
           >
             <div
               class="flex items-center justify-between cursor-pointer capitalize"
             >
-              <span>{{ item }}</span>
+              <span>{{ item?.name }}</span>
               <!-- <i class="bx bx-chevron-right text-lg"></i> -->
             </div>
             <!-- <div

@@ -69,10 +69,10 @@ onMounted(() => {
             <option
               v-for="(item, index) in categoryStore.categories.data"
               :key="index + '-select-item'"
-              :value="item"
+              :value="item.name"
               class="text-capitalize"
             >
-              {{ item }}
+              {{ item?.name }}
             </option>
           </select>
         </div>
